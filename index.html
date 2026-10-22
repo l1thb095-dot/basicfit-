@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101412">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="FORGE">
+<link rel="manifest" href="manifest.webmanifest">
+<title>FORGE — Training Club</title>
+<style>
+:root{--bg:#101412;--panel:#191f1c;--panel2:#202824;--line:#303a34;--text:#f4f7f2;--muted:#98a59c;--lime:#c4fa69;--lime2:#a5dc4b;--red:#ff7c70;--radius:22px}
+*{box-sizing:border-box}html{background:var(--bg);scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 90% -10%,#2a3c2a 0,transparent 42%),var(--bg);color:var(--text);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-bottom:100px}
+button,input,select{font:inherit}button{cursor:pointer;border:0}.app{max-width:760px;margin:auto;padding:env(safe-area-inset-top) 18px 24px}
+.top{display:flex;justify-content:space-between;align-items:center;padding:20px 2px 24px}.brand{font-size:13px;font-weight:900;letter-spacing:3px}.brand span{color:var(--lime)}.pill{font-size:11px;color:var(--lime);border:1px solid #52683a;background:#25321d;padding:8px 11px;border-radius:99px;font-weight:700}
+.eyebrow{font-size:11px;letter-spacing:2px;color:var(--lime);font-weight:800;text-transform:uppercase}.hero h1{font-size:clamp(35px,9vw,60px);letter-spacing:-2.5px;line-height:.99;margin:12px 0}.hero h1 em{color:var(--lime);font-style:normal}.hero p{color:var(--muted);line-height:1.5;margin:14px 0 22px;max-width:460px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:22px 0 28px}.stat,.card{background:linear-gradient(145deg,#1c241f,#171c19);border:1px solid var(--line);border-radius:var(--radius)}.stat{padding:14px 12px}.stat b{display:block;font-size:22px;letter-spacing:-1px}.stat small{display:block;color:var(--muted);font-size:10px;margin-top:5px}
+.sectionhead{display:flex;align-items:end;justify-content:space-between;margin:28px 0 13px}.sectionhead h2{margin:0;font-size:20px;letter-spacing:-.5px}.sectionhead small{color:var(--muted)}
+.days{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.day{padding:15px 13px;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:18px;min-height:135px;transition:.2s}.day.active{border-color:var(--lime);background:linear-gradient(145deg,#29351f,#1a211b);box-shadow:0 0 0 1px #c4fa6920}.day .daytag{font-size:10px;color:var(--muted);font-weight:800;letter-spacing:1px}.day b{display:block;font-size:15px;margin:12px 0 6px}.day span:last-child{font-size:11px;color:var(--muted);line-height:1.4;display:block}.day .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--lime);margin-right:5px}
+.primary{width:100%;background:var(--lime);color:#11170e;font-weight:900;padding:16px 18px;border-radius:16px;margin-top:14px;box-shadow:0 7px 25px #c4fa691c}.primary:active{transform:scale(.99)}.secondary{background:var(--panel2);border:1px solid var(--line);color:var(--text);padding:12px 14px;border-radius:13px;font-weight:700}
+.card{padding:17px;margin:12px 0}.exercise{padding:16px 0;border-bottom:1px solid var(--line)}.exercise:last-child{border-bottom:0;padding-bottom:0}.ex-top{display:flex;gap:12px;align-items:flex-start}.num{height:34px;width:34px;flex:0 0 34px;display:grid;place-items:center;border-radius:11px;background:#2c3926;color:var(--lime);font-size:12px;font-weight:900}.ex-name{font-weight:800;font-size:15px;line-height:1.25}.ex-meta{font-size:11px;color:var(--muted);margin-top:6px}.tag{font-size:10px;border:1px solid #3a463d;color:#c7d1c9;border-radius:7px;padding:5px 7px;white-space:nowrap;margin-left:auto}
+.memory{margin:12px 0 0 46px;padding:10px 11px;border-radius:11px;background:#121813;border:1px solid #35432d;color:#d5e6c3;font-size:11px;line-height:1.55}.memory .best{color:var(--lime);margin-top:3px}.cue{font-size:12px;line-height:1.5;color:#aeb9b0;margin:11px 0 12px 46px}.loggrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-left:46px}.logcell label{font-size:9px;color:var(--muted);display:block;margin-bottom:5px}.logcell input{width:100%;background:#0e120f;color:var(--text);border:1px solid #374139;border-radius:10px;padding:10px 7px;font-size:13px;outline:none}.logcell input:focus{border-color:var(--lime)}.done-row{margin:12px 0 0 46px;display:flex;align-items:center;justify-content:space-between;gap:8px}.check{display:flex;align-items:center;gap:8px;font-size:12px;color:#d8e0d9}.check input{accent-color:var(--lime);width:17px;height:17px}.tiny{font-size:10px;color:var(--muted)}
+.nav{position:fixed;bottom:0;left:0;right:0;background:#111613eF;backdrop-filter:blur(20px);border-top:1px solid #303a34;padding:9px 12px calc(9px + env(safe-area-inset-bottom));display:flex;justify-content:center;z-index:10}.navinner{max-width:760px;width:100%;display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.nav button{background:transparent;color:var(--muted);padding:8px 4px;border-radius:12px;font-size:10px;font-weight:700}.nav button.active{color:var(--lime);background:#25311f}.nav .ico{font-size:17px;display:block;margin-bottom:4px}
+.view{display:none}.view.active{display:block}.timerbox{display:flex;align-items:center;justify-content:space-between;gap:14px}.timer{font-size:42px;letter-spacing:-2px;font-weight:900;font-variant-numeric:tabular-nums}.timerbtns{display:flex;gap:7px;flex-wrap:wrap}.timerbtns button{padding:9px 11px;font-size:11px}.historyitem{padding:14px 0;border-bottom:1px solid var(--line)}.historyitem:last-child{border:0}.historyitem b{display:block;font-size:13px}.historyitem small{color:var(--muted);display:block;margin-top:5px;line-height:1.5}.progressbar{height:7px;background:#303a34;border-radius:9px;overflow:hidden;margin:12px 0}.progressbar span{display:block;height:100%;background:var(--lime);width:0;transition:width .25s}
+.notice{font-size:11px;color:var(--muted);line-height:1.5;padding:13px 15px;border-radius:14px;background:#1b221d;border:1px solid var(--line);margin-top:15px}.formrow{display:grid;grid-template-columns:1fr 1fr;gap:10px}.formrow label{font-size:11px;color:var(--muted)}.formrow input{display:block;width:100%;margin-top:6px;padding:12px;background:#0e120f;border:1px solid var(--line);border-radius:11px;color:var(--text)}
+@media(max-width:370px){.app{padding-left:13px;padding-right:13px}.day{padding:12px 9px}.day b{font-size:13px}.stat b{font-size:19px}.tag{display:none}.loggrid,.cue,.done-row{margin-left:0}.ex-top{align-items:center}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top"><div class="brand">FORGE<span> / </span>TRAINING CLUB</div><div class="pill">● YOUR PLAN</div></header>
+<section id="home" class="view active">
+  <div class="hero"><div class="eyebrow">Ton prochain niveau commence ici</div><h1>BUILD.<br><em>PROGRESS.</em><br>REPEAT.</h1><p>3 séances. Une méthode. Des progrès mesurables. Enregistre chaque série et construis ta progression semaine après semaine.</p></div>
+  <div class="stats">
+    <div class="stat"><b>03</b><small>SÉANCES / SEMAINE</small></div>
+    <div class="stat"><b id="workoutCount">0</b><small>SÉANCES VALIDÉES</small></div>
+    <div class="stat"><b id="exerciseCount">0</b><small>SÉRIES COCHÉES</small></div>
+  </div>
+  <div class="sectionhead"><h2>Ton planning</h2><small>SEMAINE TYPE</small></div>
+  <div class="days">
+    <button class="day active" data-session="0"><span class="daytag">LUNDI · 01</span><b>Upper A</b><span><i class="dot"></i>Pecs, dos, bras</span></button>
+    <button class="day" data-session="1"><span class="daytag">MERCREDI · 02</span><b>Legs + Core</b><span><i class="dot"></i>Jambes, abdos</span></button>
+    <button class="day" data-session="2"><span class="daytag">VENDREDI · 03</span><b>Upper B</b><span><i class="dot"></i>Dos, pecs, bras</span></button>
+  </div>
+  <button class="primary" id="startBtn">DÉMARRER LA SÉANCE <span>↗</span></button>
+  <div class="sectionhead"><h2>Ta méthode</h2><small>À CHAQUE SÉRIE</small></div>
+  <div class="card">
+    <div class="historyitem"><b>01 — Technique d'abord</b><small>Échauffe-toi 5–8 min. Fais 1–2 séries légères avant le premier mouvement.</small></div>
+    <div class="historyitem"><b>02 — Garde une marge</b><small>Sur les mouvements principaux, garde environ 1–3 répétitions propres en réserve. Pas besoin d'aller à l'échec partout.</small></div>
+    <div class="historyitem"><b>03 — Progression suivie</b><small>Quand tu atteins le haut de la fourchette sur toutes les séries avec une technique propre, augmente légèrement la charge.</small></div>
+  </div>
+  <div class="notice">À 17 ans : pas de tentatives maximales seul. Demande à un coach de vérifier ta technique. Arrête un exercice si tu ressens une douleur vive ou inhabituelle.</div>
+</section>
+
+<section id="session" class="view">
+  <div class="eyebrow" id="sessionKicker">SÉANCE 01 · LUNDI</div>
+  <div class="sectionhead" style="margin-top:10px"><h2 id="sessionTitle">Haut du corps A</h2><small id="sessionTime">60–75 MIN</small></div>
+  <p style="color:var(--muted);font-size:13px;line-height:1.5" id="sessionDesc"></p>
+  <div class="card" style="margin-top:18px">
+    <div class="sectionhead" style="margin-top:0"><h2 style="font-size:16px">Repos entre les séries</h2><small>CHRONO</small></div>
+    <div class="timerbox"><div><div class="timer" id="timer">01:30</div><div class="tiny" id="timerLabel">Prêt quand tu l'es</div></div><div class="timerbtns"><button class="secondary" data-time="60">60 s</button><button class="secondary" data-time="90">90 s</button><button class="secondary" data-time="120">120 s</button><button class="secondary" id="timerToggle">▶ Start</button></div></div>
+  </div>
+  <div class="sectionhead"><h2>Exercices</h2><small id="progressText">0 / 0 séries</small></div>
+  <div class="progressbar"><span id="progressFill"></span></div>
+  <div id="exerciseList"></div>
+  <button class="primary" id="finishBtn">TERMINER LA SÉANCE ✓</button>
+  <button class="secondary" id="backBtn" style="width:100%;margin-top:9px">← Retour au planning</button>
+  <div class="notice">L'échec technique est facultatif et réservé éventuellement à la dernière série d'un exercice d'isolation bien maîtrisé. Évite l'échec sur les mouvements lourds.</div>
+</section>
+
+<section id="history" class="view">
+  <div class="eyebrow">TES DONNÉES · TA PROGRESSION</div><h1 style="font-size:35px;letter-spacing:-1.5px;margin:10px 0">Progression<span style="color:var(--lime)">.</span></h1>
+  <p style="color:var(--muted);font-size:13px;line-height:1.5">Tes séances et tes charges restent enregistrées sur cet appareil dans ce navigateur.</p>
+  <div class="stats">
+    <div class="stat"><b id="histWorkouts">0</b><small>SÉANCES</small></div>
+    <div class="stat"><b id="histSets">0</b><small>SÉRIES COCHÉES</small></div>
+    <div class="stat"><b id="histEntries">0</b><small>ENTRÉES DE CHARGE</small></div>
+  </div>
+  <div class="sectionhead"><h2>Historique</h2><button class="secondary" id="exportBtn">Exporter</button></div>
+  <div class="card" id="historyList"><div class="tiny">Tes séances terminées apparaîtront ici.</div></div>
+  <div class="sectionhead"><h2>Poids du corps</h2><small>OPTIONNEL</small></div>
+  <div class="card"><div class="formrow"><label>Date<input type="date" id="bodyDate"></label><label>Poids (kg)<input type="number" step=".1" id="bodyWeight" placeholder="ex. 79.5"></label></div><button class="primary" id="saveBody" style="margin-top:12px">ENREGISTRER LE POIDS</button><div id="bodyLog" style="margin-top:10px"></div></div>
+  <button class="secondary" id="clearBtn" style="width:100%;color:var(--red)">Effacer toutes mes données</button>
+  <div class="notice">Export conseillé : télécharge régulièrement une copie de tes données. Les données locales peuvent être perdues si tu effaces l'historique de Safari ou changes d'appareil.</div>
+</section>
+</div>
+<nav class="nav"><div class="navinner"><button class="active" data-view="home"><span class="ico">◈</span>ACCUEIL</button><button data-view="session"><span class="ico">↗</span>SÉANCE</button><button data-view="history"><span class="ico">▥</span>PROGRESSION</button></div></nav>
+<script>
+const sessions=[
+ {name:"Haut du corps A",day:"LUNDI",time:"60–75 MIN",desc:"Pectoraux, dos, épaules et bras. Garde une technique stricte et 1–2 répétitions en réserve sur les mouvements principaux.",ex:[
+  ["Développé machine pectoraux","3","6–10","2–3 min","Dos au dossier, pieds stables, descente contrôlée. Garde 1–2 reps en réserve.","principal"],
+  ["Tirage vertical","3","8–12","2 min","Tire vers le haut de la poitrine, sans élan ni traction derrière la nuque.","principal"],
+  ["Rowing assis à la poulie","3","8–12","2 min","Dos stable, coudes vers l’arrière, retour lent.","principal"],
+  ["Élévations latérales","3","10–15","60–90 s","Charge légère, pas d’élan. Dernière série proche de l’échec technique.","isolation"],
+  ["Curl biceps haltères","3","8–12","60–90 s","Coudes stables, pas de balancement. Échec technique facultatif sur la dernière série.","isolation"],
+  ["Extension triceps poulie","2","10–15","60–90 s","Coudes près du corps. Arrête si la technique se dégrade.","isolation"]
+ ]},
+ {name:"Jambes + abdominaux",day:"MERCREDI",time:"50–70 MIN",desc:"Cuisses, ischio-jambiers, fessiers, mollets et sangle abdominale. Apprends les mouvements avec des charges modérées.",ex:[
+  ["Presse à cuisses","3","8–12","2–3 min","Bassin collé au dossier, amplitude confortable. Garde 2 reps en réserve.","principal"],
+  ["Leg curl assis","3","8–12","2 min","Ramène les talons sans à-coups, contrôle le retour.","principal"],
+  ["Soulevé de terre roumain haltères","2","8–10","2 min","Commence léger, hanches vers l’arrière, dos stable. Jamais à l’échec.","technique"],
+  ["Extension des jambes","2","10–15","90 s","Contrôle les deux phases et arrête si douleur au genou.","isolation"],
+  ["Mollets debout ou à la presse","3","10–15","60–90 s","Monte haut, marque une pause, redescends lentement.","isolation"],
+  ["Crunch abdominal","3","10–15","60 s","Enroule le haut du dos sans tirer sur la nuque.","isolation"],
+  ["Gainage avant-bras","2–3","20–40 s","45–60 s","Garde le corps aligné. Arrête dès que la position se dégrade.","core"]
+ ]},
+ {name:"Haut du corps B",day:"VENDREDI",time:"60–75 MIN",desc:"Accent sur le haut des pectoraux, le dos, les épaules et les bras. Note tes charges pour mesurer tes progrès.",ex:[
+  ["Développé incliné haltères","3","8–12","2–3 min","Banc légèrement incliné, poignets stables, charge maîtrisée.","principal"],
+  ["Tirage vertical prise neutre","3","8–12","2 min","Poignées vers le haut de la poitrine, sans élan.","principal"],
+  ["Rowing poitrine appuyée","3","8–12","2 min","Poitrine contre le support, coudes vers l’arrière.","principal"],
+  ["Élévations latérales","3","12–15","60–90 s","Mouvement strict. Dernière série proche de l’échec technique.","isolation"],
+  ["Curl marteau","2","8–12","60–90 s","Paumes face à face, coudes stables. Pas de balancement.","isolation"],
+  ["Extension triceps poulie","2","10–15","60–90 s","Contrôle le retour, garde les coudes près du corps.","isolation"],
+  ["Dead bug","2","8–12 / côté","60 s","Dos stable, mouvement lent, respiration normale.","core"]
+ ]}
+];
+const KEY="forge_fit_v1";
+let db=loadDB(), selected=0, timerSeconds=90, timerInterval=null, startedAt=null;
+function loadDB(){try{return JSON.parse(localStorage.getItem(KEY))||{logs:[],body:[]}}catch(e){return {logs:[],body:[]}}}
+function saveDB(){localStorage.setItem(KEY,JSON.stringify(db));renderStats();renderHistory()}
+function dateStr(){return new Date().toISOString().slice(0,10)}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function showView(id){document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id===id));document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.view===id));if(id==="history")renderHistory();window.scrollTo({top:0,behavior:"smooth"})}
+document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>showView(b.dataset.view));
+document.querySelectorAll(".day").forEach(b=>b.onclick=()=>{selected=+b.dataset.session;document.querySelectorAll(".day").forEach(d=>d.classList.toggle("active",d===b));});
+document.getElementById("startBtn").onclick=()=>startSession();
+document.getElementById("backBtn").onclick=()=>showView("home");
+function startSession(){renderSession();showView("session");}
+function getDraft(){return JSON.parse(sessionStorage.getItem("forge_draft_"+selected)||"{}")}
+function setDraft(d){sessionStorage.setItem("forge_draft_"+selected,JSON.stringify(d))}
+function getLastExercise(sessionIndex, exerciseIndex){
+ const logs=db.logs.filter(l=>l.session===sessionIndex).sort((a,b)=>b.id-a.id);
+ for(const log of logs){const v=log.data?.["e"+exerciseIndex];if(v&&(v.weight||v.reps))return {...v,date:log.date};}
+ return null;
+}
+function getBestExercise(sessionIndex, exerciseIndex){
+ const logs=db.logs.filter(l=>l.session===sessionIndex);let best=null;
+ for(const log of logs){const v=log.data?.["e"+exerciseIndex];if(!v||!v.weight)continue;const w=Number(v.weight);if(!Number.isFinite(w))continue;if(!best||w>Number(best.weight))best={weight:v.weight,reps:v.reps,date:log.date};}
+ return best;
+}
+function renderSession(){
+ const s=sessions[selected];document.getElementById("sessionKicker").textContent=`SÉANCE 0${selected+1} · ${s.day}`;
+ document.getElementById("sessionTitle").textContent=s.name;document.getElementById("sessionTime").textContent=s.time;document.getElementById("sessionDesc").textContent=s.desc;
+ const draft=getDraft();const list=document.getElementById("exerciseList");list.innerHTML="";
+ s.ex.forEach((ex,i)=>{const key="e"+i;const previous=getLastExercise(selected,i);const val=draft[key]||{weight:previous?.weight||"",reps:previous?.reps||"",rir:previous?.rir||"2",done:false};const best=getBestExercise(selected,i);const prevText=previous?`Dernière fois : ${previous.weight||"—"} kg × ${previous.reps||"—"} reps${previous.date?" · "+previous.date:""}`:"Pas encore d'historique — note ta première performance.";
+ const bestText=best?`Meilleure charge notée : ${best.weight} kg${best.reps?" × "+best.reps+" reps":""}`:"Meilleure performance : en attente de tes premières données.";
+ const el=document.createElement("div");el.className="card exercise";
+ el.innerHTML=`<div class="ex-top"><div class="num">${String(i+1).padStart(2,"0")}</div><div style="flex:1"><div class="ex-name">${esc(ex[0])}</div><div class="ex-meta">${ex[1]} séries · ${esc(ex[2])} reps · repos ${esc(ex[3])}</div></div><span class="tag">${ex[5]==="principal"?"COMPOSÉ":ex[5]==="technique"?"TECHNIQUE":ex[5]==="core"?"CORE":"ISOLATION"}</span></div><div class="memory"><div>↻ ${esc(prevText)}</div><div class="best">★ ${esc(bestText)}</div></div><div class="cue">${esc(ex[4])}</div><div class="loggrid"><div class="logcell"><label>CHARGE (KG)</label><input inputmode="decimal" type="number" min="0" step=".5" placeholder="ex. 25" data-i="${i}" data-k="weight" value="${esc(val.weight)}"></div><div class="logcell"><label>REPS RÉALISÉES</label><input inputmode="numeric" type="text" placeholder="${esc(ex[2])}" data-i="${i}" data-k="reps" value="${esc(val.reps)}"></div><div class="logcell"><label>EFFORT</label><select data-i="${i}" data-k="rir" style="width:100%;background:#0e120f;color:var(--text);border:1px solid #374139;border-radius:10px;padding:10px 4px;font-size:12px"><option value="2" ${val.rir==="2"?"selected":""}>RIR 2</option><option value="1" ${val.rir==="1"?"selected":""}>RIR 1</option><option value="0" ${val.rir==="0"?"selected":""}>Échec</option></select></div></div><div class="done-row"><label class="check"><input type="checkbox" data-i="${i}" data-k="done" ${val.done?"checked":""}> Exercice terminé</label><span class="tiny">${ex[5]==="principal"?"Garde 1–2 reps en réserve":ex[5]==="technique"?"Jamais à l’échec":"Échec technique facultatif"}</span></div>`;
+ list.appendChild(el);
+ });
+ list.querySelectorAll("input,select").forEach(inp=>inp.addEventListener("change",()=>{let d=getDraft(),i=inp.dataset.i,k=inp.dataset.k;d["e"+i]=d["e"+i]||{};d["e"+i][k]=k==="done"?inp.checked:inp.value;setDraft(d);updateProgress()}));
+ updateProgress();
+}
+function updateProgress(){const d=getDraft(),s=sessions[selected];let total=0,done=0;s.ex.forEach((e,i)=>{total+=Number(e[1])||1;if(d["e"+i]?.done)done+=Number(e[1])||1});document.getElementById("progressText").textContent=`${done} / ${total} séries cochées`;document.getElementById("progressFill").style.width=(done/total*100)+"%"}
+document.getElementById("finishBtn").onclick=()=>{const d=getDraft();const log={id:Date.now(),session:selected,name:sessions[selected].name,date:dateStr(),data:d};db.logs.unshift(log);saveDB();sessionStorage.removeItem("forge_draft_"+selected);renderStats();renderHistory();alert("Séance enregistrée ! Bien joué. Continue à progresser avec une technique propre.");showView("history")};
+function renderStats(){const total=db.logs.reduce((a,l)=>a+Object.values(l.data||{}).filter(v=>v.done).length,0);document.getElementById("workoutCount").textContent=db.logs.length;document.getElementById("exerciseCount").textContent=total;document.getElementById("histWorkouts").textContent=db.logs.length;document.getElementById("histSets").textContent=total;document.getElementById("histEntries").textContent=db.logs.reduce((a,l)=>a+Object.values(l.data||{}).filter(v=>v.weight||v.reps).length,0)}
+function renderHistory(){const root=document.getElementById("historyList");if(!db.logs.length){root.innerHTML='<div class="tiny">Tes séances terminées apparaîtront ici.</div>'}else{root.innerHTML=db.logs.map(l=>`<div class="historyitem"><b>${esc(l.name)} <span style="color:var(--lime)">· ${esc(l.date)}</span></b><small>${Object.entries(l.data||{}).map(([k,v])=>{let i=Number(k.slice(1));return `${esc(sessions[l.session].ex[i]?.[0]||"Exercice")}: ${v.weight?esc(v.weight)+" kg": "—"} · ${v.reps?esc(v.reps)+" reps":"reps non notées"}${v.done?" ✓":""}`}).join("<br>")}</small></div>`).join("")}
+ const body=document.getElementById("bodyLog");body.innerHTML=db.body.slice(-5).reverse().map(x=>`<div class="historyitem"><b>${esc(x.weight)} kg</b><small>${esc(x.date)}</small></div>`).join("")||'<div class="tiny">Aucun poids enregistré.</div>';renderStats()}
+document.getElementById("bodyDate").value=dateStr();
+document.getElementById("saveBody").onclick=()=>{let date=document.getElementById("bodyDate").value,weight=parseFloat(document.getElementById("bodyWeight").value);if(!date||!Number.isFinite(weight)||weight<20||weight>300){alert("Entre une date et un poids valide.");return}db.body.push({date,weight});db.body.sort((a,b)=>a.date.localeCompare(b.date));saveDB();document.getElementById("bodyWeight").value="";renderHistory()};
+document.getElementById("exportBtn").onclick=()=>{const blob=new Blob([JSON.stringify(db,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="forge-progression.json";a.click();URL.revokeObjectURL(a.href)};
+document.getElementById("clearBtn").onclick=()=>{if(confirm("Effacer définitivement toutes les séances et les poids enregistrés sur cet appareil ?")){db={logs:[],body:[]};saveDB();renderHistory()}};
+function setTimer(n){timerSeconds=n;clearInterval(timerInterval);timerInterval=null;document.getElementById("timer").textContent=fmt(n);document.getElementById("timerToggle").textContent="▶ Start";document.getElementById("timerLabel").textContent="Repos prêt"}
+function fmt(n){return String(Math.floor(n/60)).padStart(2,"0")+":"+String(n%60).padStart(2,"0")}
+document.querySelectorAll("[data-time]").forEach(b=>b.onclick=()=>setTimer(+b.dataset.time));
+document.getElementById("timerToggle").onclick=()=>{if(timerInterval){clearInterval(timerInterval);timerInterval=null;document.getElementById("timerToggle").textContent="▶ Reprendre";return}document.getElementById("timerToggle").textContent="Ⅱ Pause";document.getElementById("timerLabel").textContent="Récupération en cours";timerInterval=setInterval(()=>{timerSeconds--;document.getElementById("timer").textContent=fmt(Math.max(0,timerSeconds));if(timerSeconds<=0){clearInterval(timerInterval);timerInterval=null;document.getElementById("timerToggle").textContent="↻ Recommencer";document.getElementById("timerLabel").textContent="Repos terminé";if(navigator.vibrate)navigator.vibrate([180,80,180])}},1000)};
+renderStats();renderHistory();setTimer(90);
+if("serviceWorker" in navigator && location.protocol.startsWith("http"))window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+</script>
+</body>
+</html>
